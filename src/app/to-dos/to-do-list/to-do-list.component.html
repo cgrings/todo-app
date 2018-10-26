@@ -1,0 +1,35 @@
+<div class="col-md-12">
+  <h4>My To-Dos</h4>
+  <a class="btn btn-primary float-right" routerLink="/todo/new">New</a>
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">To-Do</th>
+        <th class="text-center">Due</th>
+        <th class="text-center">Notes</th>
+        <th class="text-center">Done</th>
+        <th class="text-center"></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="pageable">
+      <tr *ngFor="let todo of pageable.content">
+        <td>{{ todo.name }}</td>
+        <td>{{ todo.due | date: 'EE, MMM dd' }}</td>
+        <td>{{ todo.notes }}</td>
+        <td class="text-center">
+          <i class="fa fa-check-square-o" aria-hidden="true" [hidden]="!todo.done"></i>
+          <i class="fa fa-square-o" aria-hidden="true" [hidden]="todo.done"></i>
+        </td>
+        <td class="text-center">
+          <a class="btn btn-info" routerLink="/todo/edit/{{todo.id}}">
+            <i class="fa fa-pencil"></i>
+          </a>
+          <button class="btn btn-danger" (click)="removeToDo(todo)">
+            <span class="fa fa-trash"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-pager *ngIf="pageable" [(pageable)]="pageable"></app-pager>
+</div>

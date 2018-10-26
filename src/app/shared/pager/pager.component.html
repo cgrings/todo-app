@@ -1,0 +1,13 @@
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{'disabled': hasPrevious()}">
+      <a class="page-link" href="/todo/list?page={{getPreviousPageNumber()}}" tabindex="-1">Previous</a>
+    </li>
+    <li *ngFor="let page of getPages()" class="page-item" [ngClass]="{'active': page.active}">
+      <a class="page-link" href="/todo/list?page={{page.number}}">{{page.number}} <span *ngIf="page.active" class="sr-only">(current)</span></a>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled': hasNext()}">
+      <a class="page-link" href="/todo/list?page={{getNextPageNumber()}}">Next</a>
+    </li>
+  </ul>
+</nav>
